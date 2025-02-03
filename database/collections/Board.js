@@ -1,26 +1,27 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Thread = require('./Thread');
 
 // MongoDB collection for Stocks
-class Stock {
+class Board {
     static _model;
 
     constructor(collectionName) {
-        this._collectionName = collectionName || 'Stock';
+        this._collectionName = collectionName || 'Board';
         this._model = mongoose.model(this._collectionName, this._schema);
     }
 
     _schema = new mongoose.Schema({
-        symbol: {
+        name: {
             type: String,
             require: true
         },
-        likes: {
-            type: [String],
+        threads: {
+            type: [Thread],
             default: []
         },
     })
 }
 
-module.exports = Stock;
+module.exports = Board;
